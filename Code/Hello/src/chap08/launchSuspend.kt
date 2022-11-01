@@ -34,7 +34,7 @@ private fun worksInParallel(): Job {
 
     val job = GlobalScope.launch {
         val combined = one.await() + "_" + two.await()
-        println("Kotlin Combined: $combined") //따로따로 실행되기때문에 (제일 긴 시간인)3초가 걸린다.
+        println("Kotlin Combined: $combined") //따로따로 실행되기때문에 (제일 긴 시간인) 3초가 걸린다.
     }
     return job
 }
