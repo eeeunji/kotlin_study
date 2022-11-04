@@ -1,14 +1,10 @@
 package com.example.test_mvp
 
+class PlusPresenter (val view: Presenter.View) : Presenter {
+    val model: Data = Data()
 
-class PlusPresenter(
-    private var view: View,
-    private var t: Int = 0
-) : Presenter {
-
-    override fun addEunji() {
-        t++
-        view.setTotal(t)
-        view.setName("은지")
+    // presenter는 모델에 데이터를 요청, 응답받고 view에 데이터 전달함
+    override fun getData() {
+        view.setDataInTextView(model.getData())
     }
 }

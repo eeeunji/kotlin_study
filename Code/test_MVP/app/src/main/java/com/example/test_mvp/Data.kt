@@ -1,4 +1,8 @@
 package com.example.test_mvp
 
 //model
-data class Data(var name: String, var total: Int)
+class Data {
+    fun getData(): String {
+        return "은지"
+    }
+}

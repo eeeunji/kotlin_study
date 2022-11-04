@@ -2,15 +2,12 @@ package com.example.test_mvp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test_mvp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), View {
+class MainActivity : AppCompatActivity(), Presenter.View {
 
     private lateinit var binding: ActivityMainBinding
-    private val data:MutableList<Data> = mutableListOf()
-    private var adapter: Adapter? = null
-    private var present: PlusPresenter = PlusPresenter(this)
+    val pre: Presenter = PlusPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,21 +15,15 @@ class MainActivity : AppCompatActivity(), View {
         val view = binding.root
         setContentView(view)
 
-        adapter = Adapter()
-        adapter!!.listData = data
-        binding.reView.adapter = adapter
-        binding.reView.layoutManager = LinearLayoutManager(this)
-
-        binding.btnPlus.setOnClickListener{
-            present.addEunji()
+        // 사용자가 버튼을 클릭하는 액션 시작!
+        binding.btnPlus.setOnClickListener {
+            // view는 액션에 맞는 데이터를 presenter에 요청
+            pre.getData()
         }
     }
 
-    override fun setTotal(total: Int) {
-        binding.tvTotal.text = "은지는 $total 명"
+    // 마지막으로 view는 전달받는 데이터로 UI 갱신
+    override fun setDataInTextView(data: String) {
+        binding.tvName.text = data
     }
-
-    override fun setName(name: String) {
-    }
-
 }
